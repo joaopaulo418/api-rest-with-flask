@@ -14,6 +14,10 @@ def create_user():
     try:
         # Get request data
         data = request.get_json()
+        # Validate required fields are present in the request data
+        required_fields = ['name_user', 'name_enterprise', 'cnpj', 'area_of_activity', 'email', 'password']
+        if not all(field in data for field in required_fields):
+            return jsonify({'message': 'Dados incompletos'}), 400
         # Verify CNPJ length
         if len(data['cnpj']) != 14:
             return jsonify({'message': 'CNPJ deve ter 14 caracteres'}), 400
