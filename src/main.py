@@ -130,11 +130,38 @@ def update_full_user(user_id):
         data['id_user'] = user_id
         # Write updated data
         with open(filename, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=4)
+            json.dump(data, f, indent=4, ensure_ascii=False)
         return jsonify({'message': f'Usuário com ID {user_id} atualizado com sucesso'}), 200
     except Exception:
         return jsonify({'message': 'Erro interno do servidor.'}), 500
 
+@app.route('/users/<int:user_id>', methods=['PATCH'])
+def update_password(user_id):
+    """Update any user data field for a given user ID."""
+    try:
+        data_dir = os.path.join(os.getcwd(), 'data')
+        filename = os.path.join(data_dir, f'{user_id}.json')
+        # Check if user exists
+        if not os.path.exists(filename):
+            return jsonify({'message': f'Usuário com ID {user_id} não encontrado'}), 400
+        # Get request data
+        data = request.get_json()
+        # Validate that at least one field is present to update
+        if not data:
+            return jsonify({'message': 'Nenhum dado fornecido para atualização'}), 400
+        # Read current user data
+        with open(filename, 'r', encoding='utf-8') as f:
+            user_data = json.load(f)
+        # Update the provided fields
+        for field in data:
+            if field in user_data:
+                user_data[field] = data[field]
+        # Write updated data back
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(user_data, f, indent=4, ensure_ascii=False)
+        return jsonify({'message': f'Dados do usuário com ID {user_id} atualizados com sucesso'}), 200
+    except Exception:
+        return jsonify({'message': 'Erro interno do servidor.'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
