@@ -4,10 +4,6 @@ import os
 
 app = Flask(__name__)
 
-#200: Requisição bem-sucedida, tudo funcionou como esperado.
-#400: Erro nos dados enviados pelo cliente (ex: campos inválidos ou ausentes).
-#500: Falha interna no servidor durante o processamento da requisição.
-
 @app.route('/users', methods=['POST'])
 def create_user():
     """Create a new user and save their data to a JSON file."""
@@ -21,9 +17,9 @@ def create_user():
         # Verify CNPJ length
         if len(data['cnpj']) != 14:
             return jsonify({'message': 'CNPJ deve ter 14 caracteres'}), 400
-        # Acessando diretório de dados
+        # Accessing data directory
         data_dir = os.path.join(os.getcwd(), 'data')
-        #Verifica se o diretório existe, caso não exista, cria o diretório com o primeiro id = 1
+        # Check if directory exists, if not create it with first id = 1
         if not os.path.exists(data_dir):
             os.makedirs(data_dir)
             next_id = 1
@@ -37,25 +33,25 @@ def create_user():
                         if existing_data.get('cnpj') == data['cnpj']:
                             return jsonify({'message': 'CNPJ já cadastrado'}), 400
 
-            # Lista contendo todos os ids existentes
+            # List containing all existing ids
             existing_ids = []
-            # Percorre todos os arquivos do diretório com seus respectivos nomes ['1.json', '2.json', etc...]
+            # Loop through all files in directory with their names ['1.json', '2.json', etc...]
             for filename in os.listdir(data_dir):
-                # Verifica se o arquivo termina com .json
+                # Check if file ends with .json
                 if filename.endswith('.json'):
-                    # Converte o nome do arquivo para um número inteiro
+                    # Convert filename to integer
                     file_id = int(filename.replace('.json', ''))
-                    # Adiciona o id encontrado na lista de ids existentes
+                    # Add found id to list of existing ids
                     existing_ids.append(file_id)
-            # Se a lista de ids existentes não estiver vazia, encontra o maior id e incrementa em 1
+            # If list of existing ids is not empty, find highest id and increment by 1
             if existing_ids:
                 next_id = max(existing_ids) + 1
-            # Caso a lista de ids existentes esteja vazia, o primeiro id será 1
+            # If list of existing ids is empty, first id will be 1
             else:
                 next_id = 1
         # Add the generated ID to the request data
         data['id_user'] = next_id
-        # Salva os dados do usuário em um arquivo JSON
+        # Save user data to JSON file
         filename = os.path.join(os.getcwd(), 'data', f'{next_id}.json')
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
@@ -135,6 +131,7 @@ def update_full_user(user_id):
     except Exception:
         return jsonify({'message': 'Erro interno do servidor.'}), 500
 
+
 @app.route('/users/<int:user_id>', methods=['PATCH'])
 def update_password(user_id):
     """Update any user data field for a given user ID."""
@@ -162,6 +159,7 @@ def update_password(user_id):
         return jsonify({'message': f'Dados do usuário com ID {user_id} atualizados com sucesso'}), 200
     except Exception:
         return jsonify({'message': 'Erro interno do servidor.'}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
