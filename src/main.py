@@ -59,5 +59,40 @@ def create_user():
     except Exception:
         return jsonify({'message': 'Erro interno do servidor.'}), 500
 
+
+@app.route('/users', methods=['GET'])
+def get_users():
+    """Return a list of all users from the data directory."""
+    try:
+        users = []
+        data_dir = os.path.join(os.getcwd(), 'data')
+        # Read all JSON files in the data directory
+        for filename in os.listdir(data_dir):
+            if filename.endswith('.json'):
+                file_path = os.path.join(data_dir, filename)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    user_data = json.load(f)
+                    users.append(user_data)
+        return jsonify(users), 200
+    except Exception:
+        return jsonify({'message': 'Erro interno do servidor.'}), 500
+
+
+@app.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    """Return the user data for a given ID."""
+    try:
+        data_dir = os.path.join(os.getcwd(), 'data')
+        filename = os.path.join(data_dir, f'{user_id}.json')
+        if os.path.exists(filename):
+            with open(filename, 'r', encoding='utf-8') as f:
+                user_data = json.load(f)
+            return jsonify(user_data), 200
+        else:
+            return jsonify({'message': f'Usuário com ID {user_id} não encontrado'}), 400
+    except Exception:
+        return jsonify({'message': 'Erro interno do servidor.'}), 500
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)
