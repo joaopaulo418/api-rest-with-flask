@@ -94,5 +94,18 @@ def get_user(user_id):
         return jsonify({'message': 'Erro interno do servidor.'}), 500
 
 
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    try:
+        data_dir = os.path.join(os.getcwd(), 'data')
+        filename = os.path.join(data_dir, f'{user_id}.json')
+        if not os.path.exists(filename):
+            return jsonify({'message': f'Usuário com ID {user_id} não encontrado'}), 400
+        os.remove(filename)
+        return jsonify({'message': f'Usuário com ID {user_id} deletado com sucesso'}), 200
+    except Exception:
+        return jsonify({'message': 'Erro interno do servidor.'}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
