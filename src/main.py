@@ -107,5 +107,30 @@ def delete_user(user_id):
         return jsonify({'message': 'Erro interno do servidor.'}), 500
 
 
+@app.route('/users/<int:user_id>', methods=['PUT'])
+def update_full_user(user_id):
+    """Update all user data for a given ID."""
+    try:
+        data_dir = os.path.join(os.getcwd(), 'data')
+        filename = os.path.join(data_dir, f'{user_id}.json')
+        # Check if user exists
+        if not os.path.exists(filename):
+            return jsonify({'message': f'Usuário com ID {user_id} não encontrado'}), 400
+        # Get request data
+        data = request.get_json()
+        # Validate required fields are present in the request data
+        required_fields = ['name_user', 'name_enterprise', 'cnpj', 'area_of_activity', 'email', 'password']
+        if not all(field in data for field in required_fields):
+            return jsonify({'message': 'Dados incompletos'}), 400
+        # Preserve the user_id
+        data['id_user'] = user_id
+        # Write updated data
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4)
+        return jsonify({'message': f'Usuário com ID {user_id} atualizado com sucesso'}), 200
+    except Exception:
+        return jsonify({'message': 'Erro interno do servidor.'}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
