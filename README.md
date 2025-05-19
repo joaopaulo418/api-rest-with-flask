@@ -64,3 +64,13 @@ The API base route is `/user`. Individual user manipulation is done by including
 ---
 
 ## 🗂️ Expected JSON Structure
+
+```json
+{
+  "name_user": "João",
+  "name_enterprise": "Empresa X",
+  "cnpj": "12345678000100",
+  "area_of_activity": "Tecnologia",
+  "email": "joao@exemplo.com",
+  "password": "987123"
+}
