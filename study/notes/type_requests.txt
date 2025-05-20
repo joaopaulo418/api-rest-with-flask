@@ -1,0 +1,3 @@
+200: Requisição bem-sucedida, tudo funcionou como esperado.
+400: Erro nos dados enviados pelo cliente (ex: campos inválidos ou ausentes).
+500: Falha interna no servidor durante o processamento da requisição.
