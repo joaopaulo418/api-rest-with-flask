@@ -44,12 +44,8 @@ def create_enterprise():
                 file_id = int(filename.replace('.json', ''))
                 # Add found id to list of existing ids
                 existing_ids.append(file_id)
-            # If list of existing ids is not empty, find highest id and increment by 1
-            if existing_ids:
-                next_id = max(existing_ids) + 1
-            # If list of existing ids is empty, first id will be 1
-            else:
-                next_id = 1
+            # If list of existing ids is not empty, find highest id and increment by 1 and if list of existing ids is empty, first id will be 1
+            next_id = max(existing_ids) + 1 if existing_ids else 1
         # Add the generated ID to the request data
         data['id_enterprise'] = next_id
         # Save user data to JSON file
@@ -94,12 +90,8 @@ def create_user():
                 file_id = int(filename.replace('.json', ''))
                 # Add found id to list of existing ids
                 existing_ids.append(file_id)
-            # If list of existing ids is not empty, find highest id and increment by 1
-            if existing_ids:
-                next_id = max(existing_ids) + 1
-            # If list of existing ids is empty, first id will be 1
-            else:
-                next_id = 1
+            # If list of existing ids is not empty, find highest id and increment by 1 and if list of existing ids is empty, first id will be 1
+            next_id = max(existing_ids) + 1 if existing_ids else 1
         # Add the generated ID to the request data
         data['id_user'] = next_id
         # Save user data to JSON file
