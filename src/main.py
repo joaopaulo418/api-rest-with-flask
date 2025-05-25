@@ -20,9 +20,8 @@ def create_enterprise():
             return jsonify({'message': 'CNPJ deve ter 14 caracteres'}), 400
         # Accessing data directory
         data_dir = os.path.join(os.getcwd(), 'data', 'enterprises')
-        # Check if directory exists, if not create it with first id = 1
-        if not os.path.exists(data_dir):
-            os.makedirs(data_dir)
+        # Check if directory is empty, if so initialize next_id as 1
+        if not os.listdir(data_dir):
             next_id = 1
         else:
             # Check if CNPJ already exists
@@ -79,9 +78,8 @@ def create_user():
         enterprise_file = os.path.join(enterprise_dir, f"{data['id_enterprise']}.json")
         if not os.path.exists(enterprise_file):
             return jsonify({'message': 'Empresa não encontrada. Cadastre sua empresa primeiro.'}), 400
-        # Check if directory exists, if not create it with first id = 1
-        if not os.path.exists(data_dir):
-            os.makedirs(data_dir)
+        # Check if directory is empty, if so initialize next_id as 1
+        if not os.listdir(data_dir):
             next_id = 1
         else:
             # List containing all existing ids
