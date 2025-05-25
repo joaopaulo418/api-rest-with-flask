@@ -38,11 +38,12 @@ def create_enterprise():
             # Loop through all files in directory with their names ['1.json', '2.json', etc...]
             for filename in os.listdir(data_dir):
                 # Check if file ends with .json
-                if filename.endswith('.json'):
-                    # Convert filename to integer
-                    file_id = int(filename.replace('.json', ''))
-                    # Add found id to list of existing ids
-                    existing_ids.append(file_id)
+                if not filename.endswith('.json'):
+                    continue
+                # Convert filename to integer
+                file_id = int(filename.replace('.json', ''))
+                # Add found id to list of existing ids
+                existing_ids.append(file_id)
             # If list of existing ids is not empty, find highest id and increment by 1
             if existing_ids:
                 next_id = max(existing_ids) + 1
@@ -87,11 +88,12 @@ def create_user():
             # Loop through all files in directory with their names ['1.json', '2.json', etc...]
             for filename in os.listdir(data_dir):
                 # Check if file ends with .json
-                if filename.endswith('.json'):
-                    # Convert filename to integer
-                    file_id = int(filename.replace('.json', ''))
-                    # Add found id to list of existing ids
-                    existing_ids.append(file_id)
+                if not filename.endswith('.json'):
+                    continue
+                # Convert filename to integer
+                file_id = int(filename.replace('.json', ''))
+                # Add found id to list of existing ids
+                existing_ids.append(file_id)
             # If list of existing ids is not empty, find highest id and increment by 1
             if existing_ids:
                 next_id = max(existing_ids) + 1
