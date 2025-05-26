@@ -406,6 +406,10 @@ def update_full_company(company_id):
         if not all(field in data for field in required_fields):
             return jsonify({'message': 'Incomplete data',
                             'error': 'Missing required fields'}), 400
+        # Verify CNPJ length
+        if len(data['cnpj']) != 14:
+            return jsonify({'message': 'CNPJ must be 14 characters long',
+                            'error': 'Invalid CNPJ length'}), 400
         # Preserve the company_id
         data['company_id'] = company_id
         # Write updated data
@@ -440,6 +444,11 @@ def update_any_field_company(company_id):
                             'error': 'Company not found'}), 400
         # Get request data
         data = request.get_json()
+        if "cnpj" in data:
+            # Verify CNPJ length
+            if len(data['cnpj']) != 14:
+                return jsonify({'message': 'CNPJ must be 14 characters long',
+                                'error': 'Invalid CNPJ length'}), 400
         # Validate that at least one field is present to update
         if not data:
             return jsonify({'message': 'No data provided for update',
