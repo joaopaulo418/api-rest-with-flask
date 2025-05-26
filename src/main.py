@@ -58,7 +58,7 @@ def create_company():
         return jsonify({'message': 'Company created successfully!',
                         'company_id': next_id}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -118,7 +118,7 @@ def create_user():
         return jsonify({'message': 'User created successfully!',
                         'id_user': data['id_user']}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -148,7 +148,7 @@ def get_users():
                     users.append(user_data)
         return jsonify(users), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -176,7 +176,7 @@ def get_user(user_id):
         return jsonify({'message': f'User with ID {user_id} not found',
                         'error': 'User not found'}), 400
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -206,7 +206,7 @@ def get_companies():
                     companies.append(company_data)
         return jsonify(companies), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -234,7 +234,7 @@ def get_company(company_id):
         return jsonify({'message': f'Company with ID {company_id} not found',
                         'error': 'Company not found'}), 400
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -260,7 +260,7 @@ def delete_user(user_id):
         os.remove(filename)
         return jsonify({'message': f'User with ID {user_id} deleted successfully'}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except PermissionError:
         return jsonify({'message': 'Permission denied to access files',
@@ -292,7 +292,7 @@ def delete_company(company_id):
                         os.remove(user_path)
         return jsonify({'message': f'Empresa e usuários associados com ID {company_id} deletados com sucesso'}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -331,7 +331,7 @@ def update_full_user(user_id):
             json.dump(data, f, indent=4, ensure_ascii=False)
         return jsonify({'message': f'User with ID {user_id} updated successfully'}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -374,7 +374,7 @@ def update_any_field_user(user_id):
             json.dump(user_data, f, indent=4, ensure_ascii=False)
         return jsonify({'message': f'User with ID {user_id} updated successfully'}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -413,7 +413,7 @@ def update_full_company(company_id):
             json.dump(data, f, indent=4, ensure_ascii=False)
         return jsonify({'message': f'Company with ID {company_id} updated successfully'}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -456,7 +456,7 @@ def update_any_field_company(company_id):
             json.dump(company_data, f, indent=4, ensure_ascii=False)
         return jsonify({'message': f'Company with ID {company_id} updated successfully'}), 200
     except FileNotFoundError:
-        return jsonify({'message': 'Directory or file not found',
+        return jsonify({'message': 'File not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
