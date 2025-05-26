@@ -148,7 +148,7 @@ def get_users():
                     users.append(user_data)
         return jsonify(users), 200
     except FileNotFoundError:
-        return jsonify({'message': 'File not found',
+        return jsonify({'message': 'Users not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
@@ -206,7 +206,7 @@ def get_companies():
                     companies.append(company_data)
         return jsonify(companies), 200
     except FileNotFoundError:
-        return jsonify({'message': 'File not found',
+        return jsonify({'message': 'Companies not found',
                         'error': 'FileNotFoundError'}), 500
     except json.JSONDecodeError:
         return jsonify({'message': 'Error processing JSON file',
