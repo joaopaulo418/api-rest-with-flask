@@ -61,16 +61,16 @@ Este é um projeto pessoal com o objetivo de estudar e praticar os principais m�
 | `PATCH`| `/users/<id>`     | Atualiza **parcialmente** um usuário      |
 | `DELETE`| `/users/<id>`    | Remove um usuário do sistema              |
 
-### Rota `/enterprises`
+### Rota `/companies`
 
 | Método | Rota            | Descrição                                |
 |--------|------------------|--------------------------------------------|
-| `POST` | `/enterprises`          | Cria uma nova empresa                      |
-| `GET`  | `/enterprises`          | Retorna **todas as empresas**             |
-| `GET`  | `/enterprises/<id>`     | Retorna uma **empresa específica** pelo ID |
-| `PUT`  | `/enterprises/<id>`     | Atualiza **completamente** uma empresa    |
-| `PATCH`| `/enterprises/<id>`     | Atualiza **parcialmente** uma empresa     |
-| `DELETE`| `/enterprises/<id>`    | Remove uma empresa do sistema            |
+| `POST` | `/companies`          | Cria uma nova empresa                      |
+| `GET`  | `/companies`          | Retorna **todas as empresas**             |
+| `GET`  | `/companies/<id>`     | Retorna uma **empresa específica** pelo ID |
+| `PUT`  | `/companies/<id>`     | Atualiza **completamente** uma empresa    |
+| `PATCH`| `/companies/<id>`     | Atualiza **parcialmente** uma empresa     |
+| `DELETE`| `/companies/<id>`    | Remove uma empresa do sistema            |
 ---
 
 ## 🗂️ Estrutura esperada do JSON
@@ -78,17 +78,17 @@ Este é um projeto pessoal com o objetivo de estudar e praticar os principais m�
 ### User:
 ```json
 {
-  "name_user": "João",
-  "id_enterprise": 5,
+  "name": "João",
+  "company_id": 5,
   "email": "joao@exemplo.com",
   "password": "987123"
 }
 ```
-### Enterprise
+### Company
 ```json
 {
   "cnpj": "12345678000100",
-  "name_enterprise": "Empresa X",
-  "area_of_activity": "Tecnologia",
+  "name": "Empresa X",
+  "area_of_activity": "Tecnologia"
 }
 ```

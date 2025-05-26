@@ -61,16 +61,16 @@ This is a personal project aimed at studying and practicing the main methods of 
 | `PATCH`  | `/users/<id>`   | **Partially** updates a user             |
 | `DELETE` | `/users/<id>`   | Removes a user from the system           |
 
-### `/enterprises` Route
+### `/companies` Route
 
 | Method   | Route              | Description                               |
 |----------|-------------------|------------------------------------------|
-| `POST`   | `/enterprises`    | Creates a new company                     |
-| `GET`    | `/enterprises`    | Returns **all companies**                 |
-| `GET`    | `/enterprises/<id>` | Returns a **specific company** by ID    |
-| `PUT`    | `/enterprises/<id>` | **Completely** updates a company        |
-| `PATCH`  | `/enterprises/<id>` | **Partially** updates a company         |
-| `DELETE` | `/enterprises/<id>` | Removes a company from the system       |
+| `POST`   | `/companies`    | Creates a new company                     |
+| `GET`    | `/companies`    | Returns **all companies**                 |
+| `GET`    | `/companies/<id>` | Returns a **specific company** by ID    |
+| `PUT`    | `/companies/<id>` | **Completely** updates a company        |
+| `PATCH`  | `/companies/<id>` | **Partially** updates a company         |
+| `DELETE` | `/companies/<id>` | Removes a company from the system       |
 ---
 
 ## 🗂️ Expected JSON Structure
@@ -78,17 +78,17 @@ This is a personal project aimed at studying and practicing the main methods of 
 ### User:
 ```json
 {
-  "name_user": "João",
-  "id_enterprise": 5,
+  "name": "João",
+  "company_id": 5,
   "email": "joao@exemplo.com",
   "password": "987123"
 }
 ```
-### Enterprise
+### Company
 ```json
 {
   "cnpj": "12345678000100",
-  "name_enterprise": "Empresa X",
-  "area_of_activity": "Tecnologia",
+  "name": "Empresa X",
+  "area_of_activity": "Tecnologia"
 }
 ```
