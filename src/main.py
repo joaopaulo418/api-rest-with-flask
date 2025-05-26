@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from flask import Flask, request, jsonify
 # pylint: disable=C0301, C0114, W0718, C0114, C0116
 
@@ -84,6 +85,10 @@ def create_user():
         if not all(field in data for field in required_fields):
             return jsonify({'message': 'Incomplete data',
                             'error': 'Missing required fields'}), 400
+        # Check if email is valid
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", data['email']):
+            return jsonify({'message': 'Invalid email',
+                            'error': 'Invalid email'}), 400
         # Accessing data directory
         data_dir = os.path.join(os.getcwd(), 'data', 'users')
         # Check if company exists
@@ -324,6 +329,10 @@ def update_full_user(user_id):
         if not all(field in data for field in required_fields):
             return jsonify({'message': 'Incomplete data',
                             'error': 'Missing required fields'}), 400
+        # Check if email is valid
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", data['email']):
+            return jsonify({'message': 'Invalid email',
+                            'error': 'Invalid email'}), 400
         # Preserve the user_id
         data['id_user'] = user_id
         # Write updated data
@@ -362,6 +371,11 @@ def update_any_field_user(user_id):
         if not data:
             return jsonify({'message': 'No data provided for update',
                             'error': 'Missing update data'}), 400
+        if "email" in data:
+            # Check if email is valid
+            if not re.match(r"[^@]+@[^@]+\.[^@]+", data['email']):
+                return jsonify({'message': 'Invalid email',
+                                'error': 'Invalid email'}), 400
         # Read current user data
         with open(filename, 'r', encoding='utf-8') as f:
             user_data = json.load(f)
