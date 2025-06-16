@@ -1,10 +1,10 @@
-# 🧠 Study Project: User Management API
+# Study Project: User Management API
 
 This is a personal project aimed at studying and practicing the main methods of a REST API using Flask. The application simulates a user and company management system, allowing you to **create, update, remove and query data** in a simple and organized way.
 
 ---
 
-## 🚀 Features
+## Features
 
 - ✅ Add new users and companies (`POST`)
 - 🔍 Get all users and companies (`GET`)
@@ -15,7 +15,7 @@ This is a personal project aimed at studying and practicing the main methods of 
 
 ---
 
-## 🐍 Technologies Used
+## Technologies Used
 
 | Technology | Version | Note                       |
 |------------|---------|----------------------------|
@@ -28,7 +28,7 @@ This is a personal project aimed at studying and practicing the main methods of 
 
 ---
 
-## 🛡️ Business Rules
+## Business Rules
 
 - The **`cnpj`** field is used as a **unique identifier** for companies during registration.
 - It is not possible to register two companies with the same `cnpj`.
@@ -36,7 +36,7 @@ This is a personal project aimed at studying and practicing the main methods of 
 
 ---
 
-## 📡 HTTP Methods Used
+## HTTP Methods Used
 
 | Method  | Purpose                                    |
 |---------|-------------------------------------------|
@@ -48,7 +48,7 @@ This is a personal project aimed at studying and practicing the main methods of 
 
 ---
 
-## 🔀 API Routes
+## API Routes
 
 ### `/users` Route
 
@@ -73,7 +73,7 @@ This is a personal project aimed at studying and practicing the main methods of 
 | `DELETE` | `/companies/<id>` | Removes a company from the system       |
 ---
 
-## 🗂️ Expected JSON Structure
+## Expected JSON Structure
 
 ### User:
 ```json
